@@ -59,3 +59,4 @@ jobs:
                 sbom: true
               env: 
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
+                GIT_TERMINAL_PROMPT: 1
