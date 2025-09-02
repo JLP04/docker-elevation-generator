@@ -22,7 +22,7 @@ RUN mkdir -p /flightgear/script
 
 WORKDIR /fightgear/script
 
-ADD --keep-git-dir=true --link https://git@gitlab.com/flightgear/fgmeta.git /flightgear/script/fgmeta
+ADD --keep-git-dir=true --link https://git:@gitlab.com/flightgear/fgmeta.git /flightgear/script/fgmeta
 
 WORKDIR /flightgear/script/fgmeta
 
@@ -56,13 +56,13 @@ ADD --link https://git.code.sf.net/p/libplib/code.git#master /dev/null
 
 ARG branch_end=2024.1
 
-ADD --link https://git@gitlab.com/flightgear/simgear.git#release/${branch_end} /dev/null
+ADD --link https://git:@gitlab.com/flightgear/simgear.git#release/${branch_end} /dev/null
 
-ADD --link https://git@gitlab.com/flightgear/flightgear.git#release/${branch_end} /dev/null
+ADD --link https://git:@gitlab.com/flightgear/flightgear.git#release/${branch_end} /dev/null
 
-ADD --link https://git@gitlab.com/flightgear/fgdata.git#release/${branch_end} /dev/null
+ADD --link https://git:@gitlab.com/flightgear/fgdata.git#release/${branch_end} /dev/null
 
-ADD --link https://git@gitlab.com/flightgear/openscenegraph.git#release/2024-build /dev/null
+ADD --link https://git:@gitlab.com/flightgear/openscenegraph.git#release/2024-build /dev/null
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/var/lib/apt,sharing=locked,id=lib-apt-$TARGETARCH-$TARGETVARIANT \
