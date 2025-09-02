@@ -19,6 +19,6 @@ target "default" {
 }
 
 target "validate-build" {
-    inherits = ["build"]
+    inherits = ["default"]
     call = "check"
 }
