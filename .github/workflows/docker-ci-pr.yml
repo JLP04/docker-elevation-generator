@@ -33,7 +33,7 @@ jobs:
               uses: docker/setup-buildx-action@v3
 
             - name: Get Git commit timestamps
-              run: echo "TIMESTAMP=$(ls && pwd && git log -1 --pretty=%ct)"
+              run: echo "TIMESTAMP=$(ls -a && pwd && git log -1 --pretty=%ct)"
 
             - name: Get Git Indeterminate Branch
               run: echo "BRANCH_END=$(git ls-remote --heads "https://gitlab.com/flightgear/flightgear.git" | sed -nEe 's@.*[ \t]+refs/heads/release/([^ \t]+)@\1@p' | sort -t . -k 1,1n -k2,2n -k3,3n | tail -1)" >> $GITHUB_ENV
