@@ -53,7 +53,7 @@ jobs:
               uses: docker/bake-action@v6
               with:
                 targets: default
-                set: "default.args.branch_end= ${{ env.BRANCH_END }}"
+                # set: "default.args.branch_end= ${{ env.BRANCH_END }}"
                 push: true
                 provenance: true
                 sbom: true
