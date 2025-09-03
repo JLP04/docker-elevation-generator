@@ -20,15 +20,15 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGET
 
 RUN mkdir -p /flightgear/script
 
-WORKDIR /fightgear/script
+WORKDIR /flightgear/script
 
 ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
-RUN git clone https://gitlab.com/flightgear/fgmeta.git && ls
+RUN git clone https://gitlab.com/flightgear/fgmeta.git
 
 WORKDIR /flightgear/script/fgmeta
 
-RUN ls -a && pwd && git pull
+RUN git pull
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
