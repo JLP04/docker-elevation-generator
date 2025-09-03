@@ -39,7 +39,7 @@ jobs:
               run: echo "TIMESTAMP=$(git log -1 --pretty=%ct)" >> $GITHUB_ENV
 
             - name: Get Git Indeterminate Branch
-              run: echo "BRANCH_END=$(git ls-remote --heads "https://gitlab.com/flightgear/flightgear.git" | sed -nEe 's@.*[ \t]+refs/heads/release/([^ \t]+)@\1@p' | sort -t . -k 1,1n -k2,2n -k3,3n | tail -1)" >> $GITHUB_ENV
+              run: echo "BRANCH_END=$(git ls-remote --heads "https://gitlab.com/flightgear/flightgear.git" | sed -nEe 's@.*[ \t]+refs/heads/release/([^ \t]+)@\1@p' | sort -t . -k 1,1n -k2,2n -k3,3n | tail -1 | tr -d '\n')" >> $GITHUB_ENV
 
             - name: Validate build configuration
               uses: docker/bake-action@v6
