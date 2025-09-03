@@ -22,7 +22,7 @@ RUN mkdir -p /flightgear/script
 
 WORKDIR /fightgear/script
 
-ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz?ref_type=heads /dev/null
+ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
 RUN git clone https://gitlab.com/flightgear/fgmeta.git
 
@@ -54,13 +54,13 @@ ADD --link https://git.code.sf.net/p/libplib/code.git#master /dev/null
 
 ARG branch_end=2024.1
 
-ADD --link https://gitlab.com/flightgear/simgear/-/archive/release/${branch_end}/simgear-release-${branch_end}.tar.gz?ref_type=heads /dev/null
+ADD --link https://gitlab.com/flightgear/simgear/-/archive/release/${branch_end}/simgear-release-${branch_end}.tar.gz /dev/null
 
-ADD --link https://gitlab.com/flightgear/flightgear/-/archive/release/${branch_end}/flightgear-release-${branch_end}.tar.gz?ref_type=heads /dev/null
+ADD --link https://gitlab.com/flightgear/flightgear/-/archive/release/${branch_end}/flightgear-release-${branch_end}.tar.gz /dev/null
 
-ADD --link https://gitlab.com/flightgear/fgdata/-/archive/release/${branch_end}/fgdata-release-${branch_end}.tar.gz?ref_type=heads /dev/null
+ADD --link https://gitlab.com/flightgear/fgdata/-/archive/release/${branch_end}/fgdata-release-${branch_end}.tar.gz /dev/null
 
-ADD --link https://gitlab.com/flightgear/openscenegraph/-/archive/release/2024-build/openscenegraph-release-2024-build.tar.gz?ref_type=heads /dev/null
+ADD --link https://gitlab.com/flightgear/openscenegraph/-/archive/release/2024-build/openscenegraph-release-2024-build.tar.gz /dev/null
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/var/lib/apt,sharing=locked,id=lib-apt-$TARGETARCH-$TARGETVARIANT \
