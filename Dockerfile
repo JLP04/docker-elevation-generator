@@ -24,7 +24,7 @@ WORKDIR /flightgear/script
 
 ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
-RUN git config http.postBuffer 52428800 && git clone https://gitlab.com/flightgear/fgmeta.git
+RUN git config --global http.postBuffer 52428800 && git clone https://gitlab.com/flightgear/fgmeta.git
 
 WORKDIR /flightgear/script/fgmeta
 
