@@ -24,7 +24,7 @@ WORKDIR /flightgear/script
 
 ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
-RUN git clone -v https://gitlab.com/flightgear/fgmeta.git
+RUN git clone --no-single-branch --depth 1 https://gitlab.com/flightgear/fgmeta.git
 
 WORKDIR /flightgear/script/fgmeta
 
