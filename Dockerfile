@@ -24,11 +24,11 @@ WORKDIR /fightgear/script
 
 ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
-RUN git clone https://gitlab.com/flightgear/fgmeta.git
+RUN git clone https://gitlab.com/flightgear/fgmeta.git && ls
 
 WORKDIR /flightgear/script/fgmeta
 
-RUN git pull
+RUN ls -a && pwd && git pull
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
