@@ -24,7 +24,9 @@ WORKDIR /flightgear/script
 
 ADD --link https://gitlab.com/flightgear/fgmeta/-/archive/next/fgmeta-next.tar.gz /dev/null
 
-RUN sleep 1m && git clone https://gitlab.com/flightgear/fgmeta.git
+RUN echo 'IPQoS=throughput' > ~/.ssh/config
+
+RUN git clone https://gitlab.com/flightgear/fgmeta.git
 
 WORKDIR /flightgear/script/fgmeta
 
