@@ -121,7 +121,7 @@ jobs:
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 
             - name: Check
-              run: ls -aF ${{ runner.temp }}
+              run: cat ./docker-bake.hcl && cat cwd://${{ runner.temp }}/bake-meta.json
 
             - name: Build
               id: bake
