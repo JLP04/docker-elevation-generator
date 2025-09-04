@@ -121,7 +121,7 @@ jobs:
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 
             - name: Check
-              run: ls -aF
+              run: ls -aF ${{ runner.temp }}
 
             - name: Build
               id: bake
