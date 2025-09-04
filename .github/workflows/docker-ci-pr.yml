@@ -126,7 +126,7 @@ jobs:
               with:
                 files: |
                   ./docker-bake.hcl
-                  ${{ runner.temp }}/bake-meta.json
+                  cwd://${{ runner.temp }}/bake-meta.json
                 targets: default
                 set: |
                   "default.args.branch_end=${{ env.BRANCH_END }}"
