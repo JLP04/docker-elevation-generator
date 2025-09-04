@@ -1,14 +1,6 @@
-variable "DEFAULT_TAG" {
-    default = "elevation-generator:test"
-}
-
-target "docker-metadata-action" {
-    tags = ["${DEFAULT_TAG}"]
-}
-
 target "default" {
-    inherits = ["docker-metadata-action"]
     description = "The main target to build for all architectures"
+    tags = ["ghcr.io/jlp04/elevation-generator:test"]
     args = {
       "branch_end" = null
     }
