@@ -82,7 +82,7 @@ jobs:
                 docker-images: false
 
             - name: Buildx Prune
-              run: docker buildx prune
+              run: docker buildx prune -f
 
             - name: Prepare
               run: |
