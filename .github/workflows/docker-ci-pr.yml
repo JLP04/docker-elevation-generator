@@ -81,6 +81,9 @@ jobs:
                 tool-cache: true
                 docker-images: false
 
+            - name: Buildx Prune
+              run: docker buildx prune
+
             - name: Prepare
               run: |
                 platform=${{ matrix.platform }}
