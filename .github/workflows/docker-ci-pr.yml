@@ -118,7 +118,7 @@ jobs:
                 targets: validate-build
                 set: "default.args.branch_end=${{ env.BRANCH_END }}"
               env: 
-                SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
+                 OURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 
             - name: Build
               id: bake
@@ -129,9 +129,9 @@ jobs:
                   cwd://${{ runner.temp }}/bake-meta.json
                 targets: default
                 set: |
-                  "default.args.branch_end=${{ env.BRANCH_END }}"
-                  "*.platform=${{ matrix.platform }}"
-                  "*.output=type=image,push-by-digest=true,name-canonical=true"
+                  default.args.branch_end=${{ env.BRANCH_END }}
+                  *.platform=${{ matrix.platform }}
+                  *.output=type=image,push-by-digest=true,name-canonical=true
                 push: true
                 provenance: true
                 sbom: true
