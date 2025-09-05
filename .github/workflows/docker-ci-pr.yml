@@ -72,6 +72,8 @@ jobs:
           fail-fast: false
           matrix:
             platform: ${{ fromJson(needs.prepare.outputs.matrix) }}
+        permissions:
+          packages: write
         steps:
             - name: Free Up Space
               uses: jlumbroso/free-disk-space@v1.3.1
