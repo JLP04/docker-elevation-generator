@@ -136,6 +136,7 @@ jobs:
                 targets: default
                 set: |
                   default.args.branch_end=${{ env.BRANCH_END }}
+                  default.tags=ghcr.io/jlp04/elevation-generator
                   *.platform=${{ matrix.platform }}
                   *.output=type=image,push-by-digest=true,name-canonical=true
                 push: true
