@@ -65,13 +65,13 @@ ADD --link https://gitlab.com/flightgear/openscenegraph/-/archive/release/2024-b
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/var/lib/apt,sharing=locked,id=lib-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/flightgear/script/dnc-managed,sharing=private,id=dnc-managed-$TARGETARCH-$TARGETVARIANT,uid=999 \
-    /flightgear/script/fgmeta/download_and_compile.sh -s --non-interactive -b Release --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
+    /flightgear/script/fgmeta/download_and_compile.sh -s -j$(nproc) --non-interactive -b Release --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
     CARES \
     PLIB \
     SIMGEAR \
     FGFS \
     DATA \
-    OSG || /flightgear/script/fgmeta/download_and_compile.sh -s --non-interactive -b Release --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
+    OSG || /flightgear/script/fgmeta/download_and_compile.sh -s -j$(nproc) --non-interactive -b Release --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
     CARES \
     PLIB \
     SIMGEAR \
@@ -82,13 +82,13 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGET
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/var/lib/apt,sharing=locked,id=lib-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/flightgear/script/dnc-managed,sharing=private,id=dnc-managed-$TARGETARCH-$TARGETVARIANT,uid=999 \
-    /flightgear/script/fgmeta/download_and_compile.sh -s --non-interactive -b Release --reset-origin-url --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
+    /flightgear/script/fgmeta/download_and_compile.sh -s -j$(nproc) --non-interactive -b Release --reset-origin-url --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
     CARES \
     PLIB \
     SIMGEAR \
     FGFS \
     DATA \
-    OSG || /flightgear/script/fgmeta/download_and_compile.sh -s --non-interactive -b Release --reset-origin-url --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
+    OSG || /flightgear/script/fgmeta/download_and_compile.sh -s -j$(nproc) --non-interactive -b Release --reset-origin-url --cmake-args=OSG='-DCMAKE_POLICY_DEFAULT_CMP0072=OLD -DOPENGL_PROFILE=GLCORE -DOSG_GL1_AVAILABLE=OFF -DOSG_GL2_AVAILABLE=ON -DOSG_GL3_AVAILABLE=OFF -DOpenGL_GL_PREFERENCE=LEGACY' \
     CARES \
     PLIB \
     SIMGEAR \
