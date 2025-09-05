@@ -1,6 +1,6 @@
 target "default" {
     description = "The main target to build for all architectures"
-    tags = ["ghcr.io/jlp04/elevation-generator:test"]
+    tags = ["ghcr.io/jlp04/elevation-generator"]
     args = {
       "branch_end" = null
     }
