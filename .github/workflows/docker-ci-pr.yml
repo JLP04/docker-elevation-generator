@@ -116,7 +116,7 @@ jobs:
               uses: docker/bake-action@v6
               with:
                 targets: validate-build
-                set: "default.args.branch_end= ${{ env.BRANCH_END }}"
+                set: "default.args.branch_end=${{ env.BRANCH_END }}"
               env: 
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 
