@@ -81,8 +81,8 @@ jobs:
                 tool-cache: true
                 docker-images: false
 
-            - name: Buildx Prune
-              run: docker buildx prune -f
+            - name: Clean `apt` Caches
+              run: sudo apt purge -y '~c' && sudo apt clean
 
             - name: Prepare
               run: |
