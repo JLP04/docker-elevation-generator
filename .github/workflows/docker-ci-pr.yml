@@ -83,7 +83,7 @@ jobs:
             - name: Free Up More Space
               run: |
                 sudo rm -rf /usr/local/share/powershell /usr/share/swift /usr/lib/jvm || true
-                sudo apt purge aria2 ansible shellcheck rpm xorriso zsync gfortran-9 imagemagick libmagickcore-dev libmagickwand-dev libmagic-dev ant ant-optional kubectl mercurial apt-transport-https mono-complete unixodbc-dev yarn chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev snmp pollinate libpq-dev postgresql-client ruby-full sphinxsearch subversion azure-cli microsoft-edge-stable -y -f --fix-missing || true
+                sudo apt purge aria2 ansible shellcheck rpm xorriso zsync gfortran-9 imagemagick libmagickcore-dev libmagickwand-dev libmagic-dev ant ant-optional kubectl mercurial apt-transport-https mono-complete unixodbc-dev yarn chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev snmp pollinate libpq-dev postgresql-client ruby-full sphinxsearch subversion azure-cli microsoft-edge-stable -y -f || true
                 sudo apt autoremove -y
                 sudo apt clean
 
