@@ -82,12 +82,8 @@ jobs:
 
             - name: Free Up More Space
               run: |
-                sudo docker rmi $(docker image ls -aq) || true
                 sudo rm -rf /usr/local/share/powershell /usr/share/swift /usr/lib/jvm || true
-                sudo apt purge aria2 ansible shellcheck rpm xorriso zsync esl-erlang gfortran-8 gfortran-9 imagemagick libmagickcore-dev libmagickwand-dev libmagic-dev ant ant-optional kubectl mercurial apt-transport-https mono-complete libmysqlclient unixodbc-dev yarn chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev snmp pollinate libpq-dev postgresql-client ruby-full sphinxsearch subversion mongodb-org azure-cli microsoft-edge-stable -y -f || true
-                sudo apt purge '~n ^mysql' -y -f || true
-                sudo apt purge '~n ^php' -y -f || true
-                sudo apt purge '~n ^dotnet' -y -f || true
+                sudo apt purge aria2 ansible shellcheck rpm xorriso zsync gfortran-9 imagemagick libmagickcore-dev libmagickwand-dev libmagic-dev ant ant-optional kubectl mercurial apt-transport-https mono-complete unixodbc-dev yarn chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev snmp pollinate libpq-dev postgresql-client ruby-full sphinxsearch subversion azure-cli microsoft-edge-stable -y -f --fix-missing || true
                 sudo apt autoremove -y
                 sudo apt clean
 
