@@ -81,8 +81,8 @@ jobs:
                 tool-cache: true
                 docker-images: false
 
-            - name: Clean `apt` Caches
-              run: sudo apt purge -y '~c' && sudo apt clean
+            - name: Clean Old Package Config
+              run: sudo apt purge -y '~c'
 
             - name: Prepare
               run: |
