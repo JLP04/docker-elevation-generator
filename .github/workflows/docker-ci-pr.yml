@@ -74,7 +74,11 @@ jobs:
             include:
               - os: ubuntu-latest
               - os: ubuntu-24.04-arm
-                platform: linux/arm*
+                platform: linux/arm/v5
+              - os: ubuntu-24.04-arm
+                platform: linux/arm/v7
+              - os: ubuntu-24.04-arm
+                platform: linux/arm64/v8
         runs-on: ${{ matrix.os }}
         permissions:
           packages: write
