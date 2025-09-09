@@ -8,6 +8,7 @@ on:
 
 env: 
     IMAGE_NAME: jlp04/elevation-generator
+    GITHUB_IMAGE_NAME: ghcr.io/jlp04/elevation-generator
 
 jobs:
 
@@ -160,7 +161,7 @@ jobs:
                 targets: default
                 set: |
                   default.args.branch_end=${{ env.BRANCH_END }}
-                  default.tags=ghcr.io/jlp04/elevation-generator
+                  default.tags=${{ env.GITHUB_IMAGE_NAME }}
                   *.platform=${{ matrix.platform }}
                   *.output=type=image,push-by-digest=true,name-canonical=true
                 push: true
@@ -223,5 +224,5 @@ jobs:
           - name: Create manifest list and push
             working-directory: ${{ runner.temp }}/digests
             run: |
-              docker buildx imagetools create $(jq -cr '.target."docker-metadata-action".tags | map(select(startswith("${{ env.IMAGE_NAME }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/bake-meta.json) \
-                $(printf '${{ env.IMAGE_NAME }}@sha256:%s ' *)
+              docker buildx imagetools create $(jq -cr '.target."docker-metadata-action".tags | map(select(startswith("${{ env.GITHUB_IMAGE_NAME }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/bake-meta.json) \
+                $(printf '${{ env.GITHUB_IMAGE_NAME }}@sha256:%s ' *)
