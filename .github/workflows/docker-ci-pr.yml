@@ -35,6 +35,8 @@ jobs:
 
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
+              with:
+                buildkitd-flags: --debug
 
             - name: Checkout Repo
               uses: actions/checkout@v5
@@ -133,6 +135,8 @@ jobs:
 
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
+              with:
+                buildkitd-flags: --debug
 
             - name: Checkout Repo
               uses: actions/checkout@v5
@@ -169,7 +173,6 @@ jobs:
                 sbom: true
               env: 
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
-                GOPRIVATE: "https://gitlab.com/flightgear/*"
 
             - name: Export digest
               run: |
@@ -223,6 +226,8 @@ jobs:
 
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
+            with:
+              buildkitd-flags: --debug
 
           - name: Create manifest list and push
             working-directory: ${{ runner.temp }}/digests
