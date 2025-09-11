@@ -169,6 +169,7 @@ jobs:
                 sbom: true
               env: 
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
+                GOPRIVATE: "https://gitlab.com/flightgear/*"
 
             - name: Export digest
               run: |
