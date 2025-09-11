@@ -5,7 +5,12 @@ variable "GIT_AUTH_TOKEN" {
 target "default" {
     description = "The main target to build for all architectures"
     tags = ["ghcr.io/jlp04/elevation-generator:test"]
-    secret = [ "id=GIT_AUTH_TOKEN" ]
+    secret = [
+        {
+            type = "env"
+            id = "GIT_AUTH_TOKEN"
+        }
+    ]
     args = {
       "branch_end" = null
     }
