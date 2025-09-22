@@ -1,4 +1,4 @@
-name: ci-pr
+name: ci-push
 
 on:
     pull_request_target:
