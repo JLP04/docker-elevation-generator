@@ -35,7 +35,7 @@ jobs:
             - name: Push Image to Docker Hub
               run: |
                 docker buildx imagetools create \
-                --tag jlp04/elevation-generator:test
+                --tag jlp04/elevation-generator:test \
                 ghcr.io/jlp04/elevation-generator:test
 
             - name: Scout
