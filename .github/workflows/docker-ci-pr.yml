@@ -1,9 +1,6 @@
 name: ci-pr
 
 on:
-    push:
-      branches:
-        - main
     pull_request:
 
 env: 
@@ -14,6 +11,8 @@ jobs:
 
     prepare:
         runs-on: ubuntu-latest
+        permissions:
+          contents: read
         outputs:
           matrix: ${{ steps.platforms.outputs.matrix }}
         steps:
@@ -188,6 +187,7 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
           packages: write
+          pull-requests: write
         needs:
           - build
         steps:
@@ -228,3 +228,75 @@ jobs:
             run: |
               docker buildx imagetools create $(jq -cr '.target."docker-metadata-action".tags | map(select(startswith("${{ env.GITHUB_IMAGE_NAME }}")) | "-t " + .) | join(" ")' ${{ runner.temp }}/bake-meta.json) \
                 $(printf '${{ env.GITHUB_IMAGE_NAME }}@sha256:%s ' *)
+
+          - name: Scout i386
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/i386
+              only-fixed: true
+
+          - name: Scout AMD64
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/amd64
+              only-fixed: true
+
+          - name: Scout ARMV5
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/arm/v5
+              only-fixed: true
+
+          - name: Scout ARMV7
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/arm/v7
+              only-fixed: true
+
+          - name: Scout ARM64
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/arm64
+              only-fixed: true
+
+          - name: Scout PPC64
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/ppc64le
+              only-fixed: true
+
+          - name: Scout RISCV64
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/riscv64
+              only-fixed: true
+
+          - name: Scout s390x
+            uses: docker/scout-action@v1
+            with:
+              command: quickview,cves,recommendations,compare
+              image: ghcr.io/jlp04/elevation-generator:test
+              to: jlp04/elevation-generator:latest
+              platform: linux/s390x
+              only-fixed: true
