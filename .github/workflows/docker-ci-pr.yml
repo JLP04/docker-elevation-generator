@@ -142,6 +142,9 @@ jobs:
             - name: Get Git Indeterminate Branch
               run: echo "BRANCH_END=$(git ls-remote --heads "https://gitlab.com/flightgear/flightgear.git" | sed -nEe 's@.*[ \t]+refs/heads/release/([^ \t]+)@\1@p' | sort -t . -k 1,1n -k2,2n -k3,3n | tail -1 | tr -d '\n')" >> $GITHUB_ENV
 
+            - name: Debug Git Access
+              run: git clone -b release/2024-build https://gitlab.com/flightgear/openscenegraph.git
+
             - name: Validate build configuration
               uses: docker/bake-action@v6
               with:
