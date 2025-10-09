@@ -89,6 +89,7 @@ jobs:
                 platform: linux/s390x
         runs-on: ${{ matrix.os }}
         permissions:
+          contents: read
           packages: write
         steps:
             - name: Free Up Space
