@@ -1,0 +1,157 @@
+name: ci-scout
+
+on:
+    schedule:
+        - cron: 46 4 * * 5
+
+env:
+    IMAGE_NAME: jlp04/elevation-generator:latest
+
+jobs:
+    docker-scout:
+        runs-on: ubuntu-latest
+        permissions:
+            security-events: write
+        steps:
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v3
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Checkout Repo
+              uses: actions/checkout@v5
+
+            - name: Scout i386
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:test
+                platform: linux/i386
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results i386
+              id: upload-sarif-i386
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: i386
+
+            - name: Scout AMD64
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/amd64
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results AMD64
+              id: upload-sarif-amd64
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: amd64
+
+            - name: Scout ARMV5
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/arm/v5
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results ARMV5
+              id: upload-sarif-armv5
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: armv5
+
+            - name: Scout ARMV7
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/arm/v7
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results ARMV7
+              id: upload-sarif-armv7
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: armv7
+
+            - name: Scout ARM64
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/arm64
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results ARM64
+              id: upload-sarif-arm64
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: arm64
+
+            - name: Scout PPC64
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/ppc64le
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results PPC64
+              id: upload-sarif-ppc64
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: ppc64
+
+            - name: Scout RISCV64
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/riscv64
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results RISCV64
+              id: upload-sarif-riscv64
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: riscv64
+
+            - name: Scout s390x
+              uses: docker/scout-action@v1
+              with:
+                command: quickview,cves,recommendations
+                image: jlp04/elevation-generator:latest
+                platform: linux/s390x
+                sarif-file: sarif.output.json
+                only-fixed: true
+
+            - name: Upload SARIF Results s390x
+              id: upload-sarif-s390x
+              uses: github/codeql-action/upload-sarif@v3
+              with: 
+                sarif_file: sarif.output.json
+                category: s390x
