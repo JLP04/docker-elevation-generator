@@ -9,8 +9,8 @@ env:
     IMAGE_NAME: jlp04/elevation-generator
 
 jobs:
-    docker:
-        if: contains(github.event.pull_request.labels.*.name, 'pr-pull')
+    docker-merge:
+        if: contains(github.event.pull_request.labels.*.name, 'pr-pull') && ((github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]') || contains(github.event.pull_request.labels.*.name, 'run-ci-pr'))
         runs-on: ubuntu-latest
         permissions:
           contents: write
