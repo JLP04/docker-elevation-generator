@@ -48,19 +48,19 @@ RUN mkdir -p /flightgear/script/dnc-managed/flightgear/scripts/python
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ADD --link https://github.com/c-ares/c-ares.git#v1.34 /dev/null
+# ADD --link https://github.com/c-ares/c-ares.git#v1.34 /dev/null
 
-ADD --link https://git.code.sf.net/p/libplib/code.git#master /dev/null
+# ADD --link https://git.code.sf.net/p/libplib/code.git#master /dev/null
 
 ARG branch_end=2024.1
 
-ADD --link https://gitlab.com/flightgear/simgear.git?branch=release/${branch_end} /dev/null
+# ADD --link https://gitlab.com/flightgear/simgear.git?branch=release/${branch_end} /dev/null
 
-ADD --link https://gitlab.com/flightgear/flightgear.git?branch=release/${branch_end} /dev/null
+# ADD --link https://gitlab.com/flightgear/flightgear.git?branch=release/${branch_end} /dev/null
 
-ADD --link https://gitlab.com/flightgear/fgdata.git?branch=release/${branch_end} /dev/null
+# ADD --link https://gitlab.com/flightgear/fgdata.git?branch=release/${branch_end} /dev/null
 
-ADD --link https://gitlab.com/flightgear/openscenegraph.git?branch=release/2024-build /dev/null
+# ADD --link https://gitlab.com/flightgear/openscenegraph.git?branch=release/2024-build /dev/null
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked,id=cache-apt-$TARGETARCH-$TARGETVARIANT \
     --mount=type=cache,target=/var/lib/apt,sharing=locked,id=lib-apt-$TARGETARCH-$TARGETVARIANT \
