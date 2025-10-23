@@ -152,8 +152,8 @@ jobs:
               env: 
                 SOURCE_DATE_EPOCH: ${{ env.TIMESTAMP }}
 
-            - name: Test
-              run: git clone -b release/2024.1 https://gitlab.com/flightgear/flightgear.git && rm -R flightgear
+            - name: Pre-Clone GitLab Repos
+              run: git clone https://gitlab.com/flightgear/fgmeta.git && rm -Rf fgmeta && git clone -b release/2024.1 https://gitlab.com/flightgear/simgear.git && rm -Rf simgear && git clone -b release/2024.1 https://gitlab.com/flightgear/fgdata.git && rm -Rf fgdata && git clone -b release/2024-build https://gitlab.com/flightgear/openscenegraph.git && rm -Rf openscenegraph && git clone -b release/2024.1 https://gitlab.com/flightgear/flightgear.git && rm -Rf flightgear
 
             - name: Build
               id: bake
