@@ -217,7 +217,7 @@ FROM debian:latest AS run
 
 ENV ATC_PIE_VERSION=1.9.1
 
-ENV CROC_VERSION=10.2.4
+ENV CROC_VERSION=10.2.5
 
 COPY --from=build /tmp/TerraSync /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync
 
