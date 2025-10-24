@@ -165,8 +165,7 @@ jobs:
                   default.args.branch_end=${{ env.BRANCH_END }}
                   default.tags=${{ env.GITHUB_IMAGE_NAME }}
                   *.platform=${{ matrix.platform }}
-                  *.output=type=image,push-by-digest=true,name-canonical=true
-                push: true
+                  *.output=type=image,push-by-digest=true,name-canonical=true,push=true
                 provenance: true
                 sbom: true
               env: 
