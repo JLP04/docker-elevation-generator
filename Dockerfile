@@ -237,7 +237,9 @@ RUN chmod +x ./generate_elevation.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y curl ca-certificates python3 python-is-python3 python3-pyqt5 libopengl0 && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://getcroc.schollz.com | sed 's^croc_base_url="https://github.com/schollz/croc/releases/download"^croc_base_url="file:///"^g' | bash
+RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://getcroc.schollz.com | sed 's^croc_base_url="https://github.com/schollz/croc/releases/download"^croc_base_url="file://"^g' | bash
+
+RUN rm -R /v$CROC_VERSION
 
 RUN useradd --no-log-init -r -m -u 999 -g sudo user
 
