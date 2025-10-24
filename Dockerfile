@@ -215,7 +215,7 @@ RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
 FROM debian:latest AS run
 
-ENV ATC_PIE_VERSION=1.9.1
+ARG ATC_PIE_VERSION=1.9.1
 
 COPY --from=build /tmp/TerraSync /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync
 
