@@ -188,7 +188,7 @@ EOF
 
 FROM debian:latest AS build-go
 
-ENV CROC_VERSION=10.2.5
+ARG CROC_VERSION=10.2.5
 
 ENV GO_VERSION=1.24
 
@@ -216,8 +216,6 @@ RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 FROM debian:latest AS run
 
 ENV ATC_PIE_VERSION=1.9.1
-
-ENV CROC_VERSION=10.2.5
 
 COPY --from=build /tmp/TerraSync /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync
 
