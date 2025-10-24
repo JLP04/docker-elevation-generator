@@ -102,7 +102,7 @@ RUN sudo rm /etc/apt/apt.conf.d/01overrides
 
 WORKDIR /
 
-ENV ATC_PIE_VERSION=1.9.1
+ARG ATC_PIE_VERSION=1.9.1
 
 RUN sudo wget https://sourceforge.net/projects/atc-pie/files/ATC-pie-$ATC_PIE_VERSION.tar.gz
 
@@ -214,8 +214,6 @@ RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
 FROM debian:latest AS run
-
-ARG ATC_PIE_VERSION=1.9.1
 
 COPY --from=build /tmp/TerraSync /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync
 
