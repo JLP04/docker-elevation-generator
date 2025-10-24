@@ -1,3 +1,6 @@
+ARG ATC_PIE_VERSION=1.9.1
+ARG CROC_VERSION=10.2.5
+
 FROM debian:latest AS build
 
 LABEL name="elevation-generator"
@@ -102,7 +105,7 @@ RUN sudo rm /etc/apt/apt.conf.d/01overrides
 
 WORKDIR /
 
-ARG ATC_PIE_VERSION=1.9.1
+ARG ATC_PIE_VERSION
 
 RUN sudo wget https://sourceforge.net/projects/atc-pie/files/ATC-pie-$ATC_PIE_VERSION.tar.gz
 
@@ -188,7 +191,7 @@ EOF
 
 FROM debian:latest AS build-go
 
-ARG CROC_VERSION=10.2.5
+ARG CROC_VERSION
 
 ENV GO_VERSION=1.24
 
