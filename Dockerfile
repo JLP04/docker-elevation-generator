@@ -104,13 +104,13 @@ WORKDIR /
 
 ARG ATC_PIE_VERSION=1.9.1
 
-RUN sudo wget https://sourceforge.net/projects/atc-pie/files/ATC-pie-${ATC_PIE_VERSION}.tar.gz
+RUN sudo wget https://sourceforge.net/projects/atc-pie/files/ATC-pie-$ATC_PIE_VERSION.tar.gz
 
-RUN sudo tar xzf ATC-pie-${ATC_PIE_VERSION}.tar.gz
+RUN sudo tar xzf ATC-pie-$ATC_PIE_VERSION.tar.gz
 
-RUN sudo rm /ATC-pie-${ATC_PIE_VERSION}.tar.gz
+RUN sudo rm /ATC-pie-$ATC_PIE_VERSION.tar.gz
 
-RUN sudo chown -R user:sudo ATC-pie-${ATC_PIE_VERSION}
+RUN sudo chown -R user:sudo ATC-pie-$ATC_PIE_VERSION
 
 COPY --link <<"EOF" /generate_elevation.sh
 #!/bin/bash
@@ -194,9 +194,9 @@ ENV GO_VERSION=1.24
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v${CROC_VERSION}
+ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v$CROC_VERSION
 
-WORKDIR /croc-v${CROC_VERSION}
+WORKDIR /croc-v$CROC_VERSION
 
 ENV CGO_ENABLED=0
 
@@ -215,17 +215,20 @@ RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
 FROM debian:latest AS run
 
+ARG ATC_PIE_VERSION
+ARG CROC_VERSION
+
 COPY --from=build /tmp/TerraSync /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync
 
 COPY --from=build /tmp/install /flightgear/script/dnc-managed/install
 
-COPY --from=build /ATC-pie-${ATC_PIE_VERSION} /ATC-pie-${ATC_PIE_VERSION}
+COPY --from=build /ATC-pie-$ATC_PIE_VERSION /ATC-pie-$ATC_PIE_VERSION
 
 COPY --from=build /generate_elevation.sh /generate_elevation.sh
 
-COPY --from=build-go /croc-v${CROC_VERSION}/croc_v${CROC_VERSION}_Linux-unknown.tar.gz /v${CROC_VERSION}/
+COPY --from=build-go /croc-v$CROC_VERSION/croc_v${CROC_VERSION}_Linux-unknown.tar.gz /v$CROC_VERSION/
 
-COPY --from=build-go /croc-v${CROC_VERSION}/croc_v${CROC_VERSION}_checksums.txt /v${CROC_VERSION}/
+COPY --from=build-go /croc-v$CROC_VERSION/croc_v${CROC_VERSION}_checksums.txt /v$CROC_VERSION/
 
 RUN chmod +x ./generate_elevation.sh
 
@@ -241,6 +244,6 @@ RUN mkdir -p ~/.fgfs/TerraSync
 
 VOLUME ["/home/user/.fgfs/TerraSync"]
 
-WORKDIR /ATC-pie-${ATC_PIE_VERSION}
+WORKDIR /ATC-pie-$ATC_PIE_VERSION
 
 ENTRYPOINT ["/generate_elevation.sh"]
