@@ -54,6 +54,7 @@ jobs:
               uses: docker/metadata-action@v5
               with:
                 images: ${{ env.GITHUB_IMAGE_NAME }}
+                tags: type=raw,main
               
             - name: Rename meta bake definition file
               run: |
