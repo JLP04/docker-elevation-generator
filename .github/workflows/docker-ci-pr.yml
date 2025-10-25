@@ -237,7 +237,7 @@ jobs:
               command: quickview,cves,recommendations,compare
               image: ghcr.io/jlp04/elevation-generator:test
               to: jlp04/elevation-generator:latest
-              platform: linux/i386
+              platform: linux/386
               only-fixed: true
 
           - name: Scout AMD64

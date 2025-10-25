@@ -33,7 +33,7 @@ jobs:
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:test
-                platform: linux/i386
+                platform: linux/386
                 sarif-file: sarif.output.json
                 only-fixed: true
 
