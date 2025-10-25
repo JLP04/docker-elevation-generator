@@ -234,9 +234,9 @@ jobs:
           - name: Scout i386
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/386
               only-fixed: true
 
@@ -252,53 +252,53 @@ jobs:
           - name: Scout ARMV5
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/arm/v5
               only-fixed: true
 
           - name: Scout ARMV7
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/arm/v7
               only-fixed: true
 
           - name: Scout ARM64
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/arm64
               only-fixed: true
 
           - name: Scout PPC64
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/ppc64le
               only-fixed: true
 
           - name: Scout RISCV64
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/riscv64
               only-fixed: true
 
           - name: Scout s390x
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/s390x
               only-fixed: true
