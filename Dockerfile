@@ -1,6 +1,7 @@
 ARG ATC_PIE_VERSION=1.9.1
 ARG CROC_VERSION=10.2.7
 
+ARG BUILDKIT_SBOM_SCAN_CONTEXT=true
 FROM debian:latest AS build
 
 LABEL name="elevation-generator"
