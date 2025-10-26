@@ -243,9 +243,9 @@ jobs:
           - name: Scout AMD64
             uses: docker/scout-action@v1
             with:
-              command: quickview,cves,recommendations,compare
+              command: quickview,cves,recommendations
               image: ghcr.io/jlp04/elevation-generator:test
-              to: jlp04/elevation-generator:latest
+              # to: jlp04/elevation-generator:latest
               platform: linux/amd64
               only-fixed: true
 
