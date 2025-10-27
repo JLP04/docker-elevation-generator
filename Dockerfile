@@ -1,8 +1,8 @@
 ARG ATC_PIE_VERSION=1.9.1
 ARG CROC_VERSION=10.2.7
 
-ARG BUILDKIT_SBOM_SCAN_CONTEXT=true
 FROM debian:latest AS build
+ARG BUILDKIT_SBOM_SCAN_STAGE=true
 
 LABEL name="elevation-generator"
 LABEL org.opencontainers.image.authors="jlp04"
@@ -191,6 +191,7 @@ else:
 EOF
 
 FROM debian:latest AS build-go
+ARG BUILDKIT_SBOM_SCAN_STAGE=true
 
 ARG CROC_VERSION
 
@@ -218,6 +219,7 @@ RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
 FROM debian:latest AS run
+ARG BUILDKIT_SBOM_SCAN_STAGE=true
 
 ARG ATC_PIE_VERSION
 ARG CROC_VERSION
