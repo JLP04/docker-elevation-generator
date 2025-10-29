@@ -39,7 +39,7 @@ jobs:
 
             - name: Push Image to Docker Hub
               run: |
-                docker buildx imagetools create --prefer-index=false \
+                docker buildx imagetools create \
                 --tag jlp04/elevation-generator:latest \
                 ghcr.io/jlp04/elevation-generator:test
 
