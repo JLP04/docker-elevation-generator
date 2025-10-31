@@ -32,7 +32,7 @@ jobs:
               uses: docker/scout-action@v1
               with:
                 command: quickview,cves,recommendations
-                image: jlp04/elevation-generator:test
+                image: jlp04/elevation-generator:latest
                 platform: linux/386
                 sarif-file: sarif.output.json
                 only-fixed: true
