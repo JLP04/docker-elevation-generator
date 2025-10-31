@@ -242,13 +242,9 @@ RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://g
 
 RUN rm -R /v$CROC_VERSION /tmp/*
 
-RUN useradd --no-log-init -r -m -u 999 -g sudo user
-
-USER user:sudo
-
 RUN mkdir -p ~/.fgfs/TerraSync
 
-VOLUME ["/home/user/.fgfs/TerraSync"]
+VOLUME ["/root/.fgfs/TerraSync"]
 
 WORKDIR /ATC-pie-$ATC_PIE_VERSION
 
