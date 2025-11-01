@@ -2,6 +2,9 @@ name: ci-pr
 
 on:
     pull_request:
+    pull_request_target:
+      types:
+        - labeled
 
 env: 
     IMAGE_NAME: jlp04/elevation-generator
