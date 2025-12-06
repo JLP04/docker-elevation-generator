@@ -55,6 +55,8 @@ jobs:
               with:
                 images: ${{ env.GITHUB_IMAGE_NAME }}
                 tags: type=raw,main
+              env:
+                DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
               
             - name: Rename meta bake definition file
               run: |
