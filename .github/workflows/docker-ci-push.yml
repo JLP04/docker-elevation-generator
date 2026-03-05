@@ -35,7 +35,7 @@ jobs:
               uses: docker/setup-qemu-action@v3
 
             - name: Set up Docker Buildx
-              uses: docker/setup-buildx-action@v3
+              uses: docker/setup-buildx-action@v4
 
             - name: Checkout Repo
               uses: actions/checkout@v6
@@ -135,7 +135,7 @@ jobs:
               uses: docker/setup-qemu-action@v3
 
             - name: Set up Docker Buildx
-              uses: docker/setup-buildx-action@v3
+              uses: docker/setup-buildx-action@v4
 
             - name: Checkout Repo
               uses: actions/checkout@v6
@@ -224,7 +224,7 @@ jobs:
             uses: docker/setup-qemu-action@v3
 
           - name: Set up Docker Buildx
-            uses: docker/setup-buildx-action@v3
+            uses: docker/setup-buildx-action@v4
 
           - name: Create manifest list and push
             working-directory: ${{ runner.temp }}/digests
