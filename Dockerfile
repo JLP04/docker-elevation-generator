@@ -1,5 +1,5 @@
-ARG ATC_PIE_VERSION=1.9.2
-ARG CROC_VERSION=10.3.1
+ARG ATC_PIE_VERSION=1.10.0
+ARG CROC_VERSION=10.4.2
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -178,11 +178,25 @@ else:
 
     LD_LIBRARY_PATH=/flightgear/script/dnc-managed/install/openscenegraph/lib ./mkElevMap.py $1,$2 $3,$4 61 -- /flightgear/script/dnc-managed/install/flightgear/bin/fgelev
 
-    mv OUTPUT/auto.elev OUTPUT/$5.elev
+    mkdir OUTPUT/elev
+
+    mv OUTPUT/auto.elev OUTPUT/elev/$5.elev
 
     pushd OUTPUT
 
-    croc send $5.elev
+    mkdir -p bg/$5
+
+    curScale=14000000
+
+    curChangeBy=$(( $curScale / 2 ))
+
+    while [ $curChangeBy -ne 0 ]; do wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png && curScale=$(( $curScale - $curChangeBy )) || curScale=$(( $curScale + $curChangeBy )) && curChangeBy=$(( $curChangeBy / 2 )); done; wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png)))
+
+    magick map.png -alpha set -channel A -evaluate Divide 2 $5-osm.png
+
+    mv $5-osm.png bg/$5/$5-osm.png
+
+    croc send elev/$5.elev bg/$5/$5-osm.png
 
     popd
 
