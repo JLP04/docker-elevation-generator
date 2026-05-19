@@ -74,21 +74,7 @@ jobs:
           fail-fast: false
           matrix:
             platform: ${{ fromJson(needs.prepare.outputs.matrix) }}
-            include:
-              - os: ubuntu-latest
-              - os: ubuntu-24.04-arm
-                platform: linux/arm/v5
-              - os: ubuntu-24.04-arm
-                platform: linux/arm/v7
-              - os: ubuntu-24.04-arm
-                platform: linux/arm64/v8
-              - os: ubuntu-24.04-arm
-                platform: linux/ppc64le
-              - os: ubuntu-24.04-arm
-                platform: linux/riscv64
-              - os: ubuntu-24.04-arm
-                platform: linux/s390x
-        runs-on: ${{ matrix.os }}
+        runs-on: ${{ (startsWith(matrix.platform, 'linux/386') && 'ubuntu-latest') || (startsWith(matrix.platform, 'linux/amd64') && 'ubuntu-latest') || 'ubuntu-24.04-arm'}}
         permissions:
           contents: read
           packages: write
