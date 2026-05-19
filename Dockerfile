@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.0
-ARG CROC_VERSION=10.4.2
+ARG CROC_VERSION=10.4.3
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -139,6 +139,23 @@ else:
     print(round((float($4) + 0.5)))
 else:
     print(round((float($4) + 0.5)))")
+
+    pushd /ATC-pie-${ATC_PIE_VERSION}
+
+    pushd OUTPUT
+
+    mkdir -p bg/$5
+
+    curScale=14000000
+
+    curChangeBy=$(( $curScale / 2 ))
+
+    while [ $curChangeBy -ne 0 ]; do wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png && curScale=$(( $curScale - $curChangeBy )) || curScale=$(( $curScale + $curChangeBy )) && curChangeBy=$(( $curChangeBy / 2 )); done; wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png)))
+
+    popd
+
+    popd
+
     pushd /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync/
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Airports
@@ -183,14 +200,6 @@ else:
     mv OUTPUT/auto.elev OUTPUT/elev/$5.elev
 
     pushd OUTPUT
-
-    mkdir -p bg/$5
-
-    curScale=14000000
-
-    curChangeBy=$(( $curScale / 2 ))
-
-    while [ $curChangeBy -ne 0 ]; do wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png && curScale=$(( $curScale - $curChangeBy )) || curScale=$(( $curScale + $curChangeBy )) && curChangeBy=$(( $curChangeBy / 2 )); done; wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png || (curScale=$(( $curScale + 1 )) && wget "https://render.openstreetmap.org/cgi-bin/export?bbox=$2,$3,$4,$1&scale=$curScale&format=png&token=$6" -O map.png)))
 
     magick map.png -alpha set -channel A -evaluate Divide 2 $5-osm.png
 
