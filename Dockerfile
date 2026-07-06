@@ -226,7 +226,7 @@ FROM debian:latest AS build-go
 
 ARG CROC_VERSION
 
-ENV GO_VERSION=1.24
+ENV GO_VERSION=1.26
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
