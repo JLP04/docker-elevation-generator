@@ -228,7 +228,16 @@ ARG CROC_VERSION
 
 ENV GO_VERSION=1.26
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+COPY --link <<"EOF" /etc/apt/sources.list.d/debian-backports.sources
+Types: deb deb-src
+URIs: http://deb.debian.org/debian
+Suites: trixie-backports
+Components: main
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go/trixie-backports git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v$CROC_VERSION
 
