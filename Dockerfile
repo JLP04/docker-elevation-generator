@@ -237,7 +237,7 @@ Enabled: yes
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go/trixie-backports git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v$CROC_VERSION
 
