@@ -1,5 +1,5 @@
-ARG ATC_PIE_VERSION=1.10.0
-ARG CROC_VERSION=10.4.4
+ARG ATC_PIE_VERSION=1.10.1
+ARG CROC_VERSION=10.4.14
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -160,10 +160,10 @@ else:
 
     pushd /flightgear/script/dnc-managed/flightgear/scripts/python/TerraSync/
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Airports
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Models
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Objects
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Terrain
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Airports
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Models
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Objects
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/ts/ --only-subdir Terrain
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/o2c/ --only-subdir osm2city
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/o2c/ --only-subdir Buildings
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/o2c/ --only-subdir Details
@@ -171,20 +171,21 @@ else:
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/o2c/ --only-subdir Roads
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://de1mirror.flightgear.org/o2c/ --only-subdir Trees
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Airports
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Models
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Objects
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Terrain
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Airports
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Models
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Objects
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/ts/ --only-subdir Terrain
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/o2c/ --only-subdir Buildings
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/o2c/ --only-subdir Details
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/o2c/ --only-subdir Pylons
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/o2c/ --only-subdir Roads
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://terrasync.eti.pg.gda.pl/o2c/ --only-subdir Trees
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Airports
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Models
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Objects
-    ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Terrain
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Airports
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Models
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Objects
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws2/ --only-subdir Terrain
+    ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws3/
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws3/ --only-subdir Airports
     ./terrasync.py -t ~/.fgfs/TerraSync/ --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws3/ --only-subdir Models
     ./terrasync.py -t ~/.fgfs/TerraSync/ -r --top $ROUNDED_TOP --bottom $ROUNDED_BOTTOM --left $ROUNDED_LEFT --right $ROUNDED_RIGHT --report -u https://us1mirror.flightgear.org/terrasync/ws3/ --only-subdir NavData
@@ -225,7 +226,16 @@ FROM debian:latest AS build-go
 
 ARG CROC_VERSION
 
-ENV GO_VERSION=1.24
+ENV GO_VERSION=1.26
+
+COPY --link <<"EOF" /etc/apt/sources.list.d/debian-backports.sources
+Types: deb deb-src
+URIs: http://deb.debian.org/debian
+Suites: trixie-backports
+Components: main
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
