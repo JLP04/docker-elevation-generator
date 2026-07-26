@@ -5,7 +5,7 @@ target "default" {
       "branch_end" = null
     }
     cache-from = [ "type=gha" ]
-    cache-to = [ "type=gha,mode=max" ]
+    cache-to = [ "type=gha,mode=max,ignore-error=true" ]
     attest = [
         {
             type="provenance"
