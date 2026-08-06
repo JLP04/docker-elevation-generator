@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=10.6.0
+ARG CROC_VERSION=11.0.1
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -226,16 +226,7 @@ FROM debian:latest AS build-go
 
 ARG CROC_VERSION
 
-ENV GO_VERSION=1.26
-
-COPY --link <<"EOF" /etc/apt/sources.list.d/debian-backports.sources
-Types: deb deb-src
-URIs: http://deb.debian.org/debian
-Suites: trixie-backports
-Components: main
-Enabled: yes
-Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
-EOF
+ENV GO_VERSION=1.24
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
@@ -254,7 +245,7 @@ RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TAR
 
 RUN rm -rf /root/.cache/go-build/*
 
-RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE
+RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE src/codephrase/wordlists/LICENSE.txt
 
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
