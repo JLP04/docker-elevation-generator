@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=11.2.5
+ARG CROC_VERSION=11.3.0
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -254,7 +254,7 @@ RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TAR
 
 RUN rm -rf /root/.cache/go-build/*
 
-RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE src/codephrase/wordlists/LICENSE.txt
+RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
