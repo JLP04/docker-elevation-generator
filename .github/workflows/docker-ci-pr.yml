@@ -135,7 +135,7 @@ jobs:
               run: echo "BRANCH_END=$(git ls-remote --heads "https://gitlab.com/flightgear/flightgear.git" | sed -nEe 's@.*[ \t]+refs/heads/release/([^ \t]+)@\1@p' | sort -t . -k 1,1n -k2,2n -k3,3n | tail -1 | tr -d '\n')" >> $GITHUB_ENV
 
             - name: Validate build configuration
-              uses: docker/bake-action@5be5f02ff8819ecd3092ea6b2e6261c31774f2b4 # v6.10.0
+              uses: docker/bake-action@d3418bd7d0e9324001bca92fa8ba175ea7e6dc9b # v7.3.0
               with:
                 targets: validate-build
                 set: "default.args.branch_end=${{ env.BRANCH_END }}"
@@ -144,7 +144,7 @@ jobs:
 
             - name: Build
               id: bake
-              uses: docker/bake-action@5be5f02ff8819ecd3092ea6b2e6261c31774f2b4 # v6.10.0
+              uses: docker/bake-action@d3418bd7d0e9324001bca92fa8ba175ea7e6dc9b # v7.3.0
               with:
                 files: |
                   ./docker-bake.hcl
