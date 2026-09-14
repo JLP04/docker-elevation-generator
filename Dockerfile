@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=11.5.0
+ARG CROC_VERSION=11.5.3
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -256,7 +256,9 @@ RUN rm -rf /root/.cache/go-build/*
 
 RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
-RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
+RUN python3 packaging/release.py checksums --version "${CROC_VERSION}" --artifacts dist
+
+RUN python3 packaging/release.py verify-assets --version "${CROC_VERSION}" --artifacts dist
 
 FROM debian:latest AS run
 
