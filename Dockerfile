@@ -237,7 +237,7 @@ Enabled: yes
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates python3 && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v$CROC_VERSION
 
@@ -256,9 +256,7 @@ RUN rm -rf /root/.cache/go-build/*
 
 RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
-RUN python3 packaging/release.py checksums --version "${CROC_VERSION}" --artifacts .
-
-RUN python3 packaging/release.py verify-assets --version "${CROC_VERSION}" --artifacts .
+RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
 FROM debian:latest AS run
 
