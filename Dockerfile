@@ -256,9 +256,9 @@ RUN rm -rf /root/.cache/go-build/*
 
 RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
-RUN python3 packaging/release.py checksums --version "${CROC_VERSION}" --artifacts dist
+RUN python3 packaging/release.py checksums --version "${CROC_VERSION}" --artifacts .
 
-RUN python3 packaging/release.py verify-assets --version "${CROC_VERSION}" --artifacts dist
+RUN python3 packaging/release.py verify-assets --version "${CROC_VERSION}" --artifacts .
 
 FROM debian:latest AS run
 
