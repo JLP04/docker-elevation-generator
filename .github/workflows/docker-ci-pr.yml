@@ -22,15 +22,6 @@ jobs:
             - name: Checkout Repo
               uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-            - name: Create matrix
-              id: platforms
-              run: |
-                echo "matrix=$(docker buildx bake --print | jq -cr '.target."default".platforms')" >>${GITHUB_OUTPUT}
-
-            - name: Show matrix
-              run: |
-                echo ${{ steps.platforms.outputs.matrix }}
-
             - name: Docker meta
               id: meta
               uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
