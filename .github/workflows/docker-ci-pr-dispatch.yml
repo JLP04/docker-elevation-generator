@@ -47,6 +47,7 @@ jobs:
             platform: ${{ fromJson(needs.prepare_matrix.outputs.matrix) }}
         runs-on: ${{ (startsWith(matrix.platform, 'linux/386') && 'ubuntu-latest') || (startsWith(matrix.platform, 'linux/amd64') && 'ubuntu-latest') || 'ubuntu-24.04-arm'}}
         permissions:
+          actions: read
           contents: read
           packages: write
         steps:
@@ -75,6 +76,7 @@ jobs:
                 name: bake-meta
                 path: ${{ runner.temp }}
                 run-id: ${{ inputs.workflow_run_id }}
+                github-token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Login to Docker Hub
               uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
