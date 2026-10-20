@@ -1,12 +1,6 @@
 name: ci-scout
 
 on:
-    push:
-        branches:
-            - main
-        paths:
-            - Dockerfile
-            - docker-bake.hcl
     schedule:
         - cron: 46 4 * * 5
 
