@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=11.5.4
+ARG CROC_VERSION=11.5.5
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -226,7 +226,7 @@ FROM debian:latest AS build-go
 
 ARG CROC_VERSION
 
-ENV GO_VERSION=1.26
+ENV GO_VERSION=1.27
 
 COPY --link <<"EOF" /etc/apt/sources.list.d/debian-backports.sources
 Types: deb deb-src
