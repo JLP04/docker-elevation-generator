@@ -14,6 +14,7 @@ jobs:
           contents: write
           packages: read
           pull-requests: write
+          security-events: write
         steps:
             - name: Free Up Space
               uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
@@ -63,6 +64,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/386
+                sarif-file: sarif.i386.output.json
                 only-fixed: true
 
             - name: Scout AMD64
@@ -71,6 +73,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/amd64
+                sarif-file: sarif.amd64.output.json
                 only-fixed: true
 
             - name: Scout ARMV5
@@ -79,6 +82,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/arm/v5
+                sarif-file: sarif.armv5.output.json
                 only-fixed: true
 
             - name: Scout ARMV7
@@ -87,6 +91,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/arm/v7
+                sarif-file: sarif.armv7.output.json
                 only-fixed: true
 
             - name: Scout ARM64
@@ -95,6 +100,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/arm64
+                sarif-file: sarif.arm64.output.json
                 only-fixed: true
 
             - name: Scout PPC64
@@ -103,6 +109,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/ppc64le
+                sarif-file: sarif.ppc64.output.json
                 only-fixed: true
 
             - name: Scout RISCV64
@@ -111,6 +118,7 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/riscv64
+                sarif-file: sarif.riscv64.output.json
                 only-fixed: true
 
             - name: Scout s390x
@@ -119,7 +127,86 @@ jobs:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
                 platform: linux/s390x
+                sarif-file: sarif.s390x.output.json
                 only-fixed: true
 
             - name: Merge PR
               run: git pull --all && gh pr merge -md
+
+            - name: Get Branch Info
+              id: branch-info
+              run: |
+                echo "ref=$(git symbolic-ref HEAD)" >>${GITHUB_OUTPUT}
+                echo "sha=$(git rev-parse HEAD)" >>${GITHUB_OUTPUT}
+
+            - name: Upload SARIF Results i386
+              id: upload-sarif-i386
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.i386.output.json
+                category: i386
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results AMD64
+              id: upload-sarif-amd64
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.amd64.output.json
+                category: amd64
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results ARMV5
+              id: upload-sarif-armv5
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.armv5.output.json
+                category: armv5
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results ARMV7
+              id: upload-sarif-armv7
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.armv7.output.json
+                category: armv7
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results ARM64
+              id: upload-sarif-arm64
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.arm64.output.json
+                category: arm64
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results PPC64
+              id: upload-sarif-ppc64
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.ppc64.output.json
+                category: ppc64
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results RISCV64
+              id: upload-sarif-riscv64
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.riscv64.output.json
+                category: riscv64
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
+
+            - name: Upload SARIF Results s390x
+              id: upload-sarif-s390x
+              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              with: 
+                sarif_file: sarif.s390x.output.json
+                category: s390x
+                ref: ${{ steps.branch-info.outputs.ref }}
+                sha: ${{ steps.branch-info.outputs.sha }}
