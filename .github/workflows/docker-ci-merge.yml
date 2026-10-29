@@ -141,7 +141,7 @@ jobs:
 
             - name: Upload SARIF Results i386
               id: upload-sarif-i386
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.i386.output.json
                 category: i386
@@ -150,7 +150,7 @@ jobs:
 
             - name: Upload SARIF Results AMD64
               id: upload-sarif-amd64
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.amd64.output.json
                 category: amd64
@@ -159,7 +159,7 @@ jobs:
 
             - name: Upload SARIF Results ARMV5
               id: upload-sarif-armv5
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.armv5.output.json
                 category: armv5
@@ -168,7 +168,7 @@ jobs:
 
             - name: Upload SARIF Results ARMV7
               id: upload-sarif-armv7
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.armv7.output.json
                 category: armv7
@@ -177,7 +177,7 @@ jobs:
 
             - name: Upload SARIF Results ARM64
               id: upload-sarif-arm64
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.arm64.output.json
                 category: arm64
@@ -186,7 +186,7 @@ jobs:
 
             - name: Upload SARIF Results PPC64
               id: upload-sarif-ppc64
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.ppc64.output.json
                 category: ppc64
@@ -195,7 +195,7 @@ jobs:
 
             - name: Upload SARIF Results RISCV64
               id: upload-sarif-riscv64
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.riscv64.output.json
                 category: riscv64
@@ -204,7 +204,7 @@ jobs:
 
             - name: Upload SARIF Results s390x
               id: upload-sarif-s390x
-              uses: github/codeql-action/upload-sarif@6f2ac81f5cd81fe351a197ba0b00d91d03cd2aee # v4.39.0
+              uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
               with: 
                 sarif_file: sarif.s390x.output.json
                 category: s390x
