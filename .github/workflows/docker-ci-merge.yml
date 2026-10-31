@@ -59,7 +59,7 @@ jobs:
                 ghcr.io/jlp04/elevation-generator:test
 
             - name: Scout i386
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -68,7 +68,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout AMD64
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -77,7 +77,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout ARMV5
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -86,7 +86,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout ARMV7
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -95,7 +95,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout ARM64
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -104,7 +104,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout PPC64
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -113,7 +113,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout RISCV64
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
@@ -122,7 +122,7 @@ jobs:
                 only-fixed: true
 
             - name: Scout s390x
-              uses: docker/scout-action@a4119c5a8c5076236a54e4ce99531f7e4dd2ef84 # v1.27.0
+              uses: docker/scout-action@e7e2a72bf1485d10a58f30696b6c513b261ce4fa # v1.29.0
               with:
                 command: quickview,cves,recommendations
                 image: jlp04/elevation-generator:latest
