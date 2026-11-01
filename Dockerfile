@@ -252,9 +252,11 @@ ARG TARGETVARIANT
 
 RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc
 
+RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc-update ./cmd/croc-update
+
 RUN rm -rf /root/.cache/go-build/*
 
-RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
+RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc croc-update LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
