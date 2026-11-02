@@ -283,7 +283,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends
 
 RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://getcroc.schollz.com | sed 's^croc_base_url="https://github.com/schollz/croc/releases/download"^croc_base_url="file://"^g' | bash
 
-RUN rm -R /v$CROC_VERSION /tmp/*
+RUN rm -R /v$CROC_VERSION
 
 RUN mkdir -p ~/.fgfs/TerraSync
 
