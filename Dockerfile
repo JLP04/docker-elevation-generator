@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=11.6.0
+ARG CROC_VERSION=11.6.3
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -252,9 +252,11 @@ ARG TARGETVARIANT
 
 RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc
 
+RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc-update ./cmd/croc-update
+
 RUN rm -rf /root/.cache/go-build/*
 
-RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
+RUN tar -czvf croc_v${CROC_VERSION}_Linux-unknown.tar.gz croc croc-update LICENSE THIRD_PARTY_NOTICES.md src/codephrase/wordlists/LICENSE.txt
 
 RUN sha256sum *.tar.gz > croc_v${CROC_VERSION}_checksums.txt
 
@@ -279,9 +281,9 @@ RUN chmod +x ./generate_elevation.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y curl ca-certificates python3 python-is-python3 python3-pyqt5 libopengl0 wget && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://getcroc.schollz.com | sed 's^croc_base_url="https://github.com/schollz/croc/releases/download"^croc_base_url="file://"^g' | bash
+RUN set -o pipefail && curl https://getcroc.schollz.com | bash || curl https://getcroc.schollz.com | sed 's^croc_base_url="https://github.com/schollz/croc/releases/download"^croc_base_url="file://"^g' | sed 's^*) echo "Unsupported architecture: ${croc_arch}" >&2; exit 1;;^*) croc_arch=unknown;;^g' | bash
 
-RUN rm -R /v$CROC_VERSION /tmp/*
+RUN rm -R /v$CROC_VERSION
 
 RUN mkdir -p ~/.fgfs/TerraSync
 
