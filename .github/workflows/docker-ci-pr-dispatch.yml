@@ -39,6 +39,7 @@ jobs:
             default=ubuntu-26.04-arm
             linux/386=ubuntu-latest
             linux/amd64=ubuntu-latest
+          setup-qemu: true
           cache: true
           cache-mode: max
           output: image
@@ -64,6 +65,7 @@ jobs:
           default=ubuntu-26.04-arm
           linux/386=ubuntu-latest
           linux/amd64=ubuntu-latest
+        setup-qemu: true
         cache: true
         cache-mode: max
         output: image
