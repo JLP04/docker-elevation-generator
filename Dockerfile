@@ -1,5 +1,5 @@
 ARG ATC_PIE_VERSION=1.10.1
-ARG CROC_VERSION=11.6.5
+ARG CROC_VERSION=11.6.6
 
 ARG BUILDKIT_SBOM_SCAN_STAGE=true
 FROM debian:latest AS build
@@ -226,8 +226,6 @@ FROM debian:latest AS build-go
 
 ARG CROC_VERSION
 
-ENV GO_VERSION=1.27
-
 COPY --link <<"EOF" /etc/apt/sources.list.d/debian-backports.sources
 Types: deb deb-src
 URIs: http://deb.debian.org/debian
@@ -237,7 +235,7 @@ Enabled: yes
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-$GO_VERSION-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt --no-install-recommends install -y golang-go git ca-certificates && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 ADD --link https://github.com/schollz/croc.git#v${CROC_VERSION} /croc-v$CROC_VERSION
 
@@ -250,9 +248,9 @@ ENV LDFLAGS='-s -w -buildid= -extldflags "-static"'
 ARG TARGETARCH
 ARG TARGETVARIANT
 
-RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc
+RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc
 
-RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT /usr/lib/go-$GO_VERSION/bin/go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc-update ./cmd/croc-update
+RUN --mount=type=cache,target=/root/.cache/go-build,id=cache-go-$TARGETARCH-$TARGETVARIANT go build -buildvcs=false -trimpath -tags netgo,osusergo -ldflags "$LDFLAGS" -o croc-update ./cmd/croc-update
 
 RUN rm -rf /root/.cache/go-build/*
 
