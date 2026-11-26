@@ -30,7 +30,7 @@ jobs:
     docker-pr-validate:
         needs:
             - preset-variables
-        uses: docker/github-builder/.github/workflows/bake.yml@02ccc51e26beaa9507db1f2a0103f3d9c8c1c16a # v1
+        uses: docker/github-builder/.github/workflows/bake.yml@74e66e074b95238e22e4d3cd2a3000ed65abca79 # v1
         permissions:
           contents: read
           id-token: write
@@ -55,7 +55,7 @@ jobs:
       needs:
           - preset-variables
           - docker-pr-validate
-      uses: docker/github-builder/.github/workflows/bake.yml@02ccc51e26beaa9507db1f2a0103f3d9c8c1c16a # v1
+      uses: docker/github-builder/.github/workflows/bake.yml@74e66e074b95238e22e4d3cd2a3000ed65abca79 # v1
       permissions:
         contents: read
         packages: write
