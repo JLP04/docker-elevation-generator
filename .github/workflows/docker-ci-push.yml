@@ -32,7 +32,7 @@ jobs:
   docker-push-validate:
       needs:
           - preset-variables
-      uses: docker/github-builder/.github/workflows/bake.yml@74e66e074b95238e22e4d3cd2a3000ed65abca79 # v1
+      uses: docker/github-builder/.github/workflows/bake.yml@175bf5d95f73a62ca80f924166a1ab98bf045c24 # v1
       permissions:
         contents: read
         id-token: write
@@ -57,7 +57,7 @@ jobs:
     needs:
         - preset-variables
         - docker-push-validate
-    uses: docker/github-builder/.github/workflows/bake.yml@74e66e074b95238e22e4d3cd2a3000ed65abca79 # v1
+    uses: docker/github-builder/.github/workflows/bake.yml@175bf5d95f73a62ca80f924166a1ab98bf045c24 # v1
     permissions:
       contents: read
       packages: write
